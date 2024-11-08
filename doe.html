@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doe Sangue</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            background: url('https://www.transparenttextures.com/patterns/paper.png') repeat;
+            font-size: 1em;
+        }
+
+        .newsletter-container {
+            width: 100%;
+            margin: auto;
+            background-color: #EEE2E2;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-content {
+            display: flex; /* Flexbox para colocar as divs lado a lado */
+            justify-content: space-between; /* Espaço entre as divs */
+            flex-wrap: wrap; /* Permite que as divs se ajustem se a tela for pequena */
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .container-segundo, .news-layout {
+            width: 48%; /* 48% para permitir espaço entre as divs */
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .container-segundo, .news-item, .services-content-texto {
+            background-color: #2664ac;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .services-content-titulo {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #2664ac;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .container-segundo.visible, .news-item.visible, .services-content-titulo.visible, .services-content-texto.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        header {
+            background-color: #a50000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .subheader {
+            color: #000000;
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .news-layout {
+            display: flex; /* Usando Flexbox em vez de grid */
+            flex-direction: column; /* Coloca os itens em coluna */
+            gap: 20px;
+            width: 100%;
+            margin-left: 0;
+        }
+
+        .news-item {
+            background-color: #ff7f7f;
+            border-radius: 10px;
+            color: white;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid #d1d1d1;
+        }
+
+        .news-item img {
+            width: 100%;
+            border-radius: 10px;
+            max-height: 200px;
+            object-fit: cover;
+        }
+
+        .news-item h2 {
+            margin: 10px 0;
+        }
+
+        .services-content-titulo {
+            font-size: 30px;
+            color: #ffffff;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .services-content-texto {
+            font-size: 30px;
+            line-height: 1.6;
+            text-align: center;
+            color: #ffffff;
+            margin: 20px 0;
+            margin-top: -30px;
+            animation-delay: 0.2s;
+        }
+
+        .btn {
+            background-color: #fff;
+            color: white;
+            border: 2px solid #94150D;
+            padding: 9px 0;
+            font-size: 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            width: 150px;
+            margin: 20px auto;
+            text-align: center;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn.voltar {
+            background-color: white;
+            color: #8b1b1b;
+            border: 2px solid #8b1b1b;
+        }
+
+        .btn:hover {
+            background-color: #94150D; /* Fundo vermelho */
+            color: #fff; /* Texto branco */
+            transform: scale(1.1); /* Aumenta levemente o botão */
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                font-size: 28px;
+            }
+
+            .subheader {
+                font-size: 20px;
+            }
+
+            .services-content-titulo {
+                font-size: 24px;
+            }
+
+            .services-content-texto {
+                font-size: 18px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .news-item {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .news-layout {
+                flex-direction: column; /* Em telas menores, a news-layout será uma coluna */
+            }
+
+            .main-content {
+                flex-direction: column; /* Coloca as divs uma abaixo da outra em telas pequenas */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 24px;
+            }
+
+            .subheader {
+                font-size: 18px;
+            }
+
+            .services-content-titulo {
+                font-size: 20px;
+            }
+
+            .services-content-texto {
+                font-size: 16px;
+            }
+
+            .news-item {
+                padding: 10px;
+            }
+
+            .news-layout {
+                grid-template-columns: 1fr; /* Em telas muito pequenas, as notícias serão uma abaixo da outra */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="newsletter-container">
+        <header>
+            Doe Sangue
+        </header>
+        <div class="subheader">"Um simples ato que pode ser repercutido por várias gerações"</div>
+
+        <div class="main-content">
+            <!-- Troquei a posição das divs .news-layout e .container-segundo -->
+            <div class="container-segundo visible" id="importance-section">
+                <div class="services-content-titulo">
+                    <h2>Qual a importância de doar?</h2>
+                </div>
+                <div class="services-content-texto">
+                    Cada gota é uma nova esperança. Ao doar, você se torna um herói anônimo,
+                    fazendo a diferença na vida de alguém que precisa. Doe sangue, doe vida!
+                </div>
+            </div>
+
+            <div class="news-layout">
+                <div class="news-item">
+                    <img src="https://cdn.prod.website-files.com/62cc56fc2b55bd9bafba3478/648a595935263e90541b8fc4_doar-sangue-faz-bem%20(1).jpg" alt="Imagem de doação de sangue">
+                    <h2>Prepare-se bem antes de doar!</h2>
+                    <p>Uma boa noite de sono pelo menos seis horas por dia.</p>
+                    <p>Se alimente adequadamente antes de doar!</p>
+                    <p>Sempre se mantenha hidratado!</p>
+                </div>
+
+                <div class="news-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQWUh_ZtfnLe6s_htNROTlhEwqbofInlOXMg&s" alt="Imagem de doação de sangue">
+                    <h2>Requisitos</h2>
+                    <p>Ter entre 16 e 69 anos e pesar mais de 50kg.</p>
+                    <p>Não estar em jejum e evitar alimentação gordurosa.</p>
+                    <p>Apresentar documento oficial de identidade com foto.</p>
+                </div>
+
+                <div class="news-item">
+                    <img src="https://www12.senado.leg.br/radio/1/noticia/2024/09/26/27-de-setembro-e-o-dia-nacional-da-doacao-de-orgaos/@@images/ce2a7d7c-8b3f-47d9-b5a9-d9608e0fefba.jpeg" alt="Imagem de doação de sangue">
+                    <h2>Motivos para ir doar sangue</h2>
+                    <p>Dia de folga. Protege o coração. Menos risco de câncer. Ajudar quem precisa.</p>
+                </div>
+
+                <div class="news-item">
+                    <img src="https://clinicaimagemsorriso.com.br/wp-content/uploads/2021/08/doacao-de-sangue.jpg" alt="Imagem de doação de sangue">
+                    <h2>Quantas vidas podem salvar?</h2>
+                    <p>A doação permite salvar até quatro pessoas.</p>
+                    <p>Em uma doação, são coletados no máximo 450 ml.</p>
+                    <p>O sangue coletado é reposto em 24 horas pelo organismo.</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="inicio.html" class="btn voltar">Voltar</a>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.news-item, .container-segundo, .services-content-titulo, .services-content-texto');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    element.classList.add('visible');
+                } else {
+                    element.classList.remove('visible');
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.scrollTo(0, 0);
+        });
+    </script>
+
+</body>
+
+</html>
